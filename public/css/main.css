@@ -27,7 +27,11 @@ header {
 	color: #00BCD4;
 	height: 56px;
 	margin: 0 0 14px 0;
-	text-align: center;
+}
+
+.user-info{
+	float: right;
+	margin-right: 10px;
 }
 
 p {
