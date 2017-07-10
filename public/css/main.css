@@ -118,6 +118,11 @@ img {
 
 /****** Click Styling ******/
 
+#search{
+	margin-top: 20px;
+	font-size: 30px;
+}
+
 .btn-container {	/* Styling for the div that contains the buttons */
 	margin: -10px auto 0 auto;
 	text-align: center;
@@ -132,7 +137,6 @@ img {
 	font-size: 14px;
 	border-radius: 3px;
 	padding: 10px 5px;
-	width: 100px;
 	font-weight: 500;
 }
 
