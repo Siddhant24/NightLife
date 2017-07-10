@@ -1,7 +1,7 @@
 'use strict';
 
 var path = process.cwd();
-var ClickHandler = require(path + '/app/controllers/clickHandler.server.js');
+var search = require('../Search/search.js');
 
 module.exports = function (app, passport) {
 
@@ -13,10 +13,8 @@ module.exports = function (app, passport) {
 		}
 	}
 
-	var clickHandler = new ClickHandler();
-
 	app.route('/')
-		.get(isLoggedIn, function (req, res) {
+		.get(function (req, res) {
 			res.sendFile(path + '/public/index.html');
 		});
 
@@ -49,5 +47,13 @@ module.exports = function (app, passport) {
 			successRedirect: '/',
 			failureRedirect: '/login'
 		}));
+		
+	app.route('/search')
+		.post(function(req, res){
+		//	console.log(req.body);
+			search.nearby(req.body).then(function(data){
+				res.send(data);
+			});
+		});
 
 };
