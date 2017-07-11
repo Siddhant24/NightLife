@@ -18,13 +18,10 @@
     
     function updateGoing(){
         ajaxFunctions.ajaxRequest('GET', appUrl + '/going', function(data){
-            console.log(data);
             var newData = JSON.parse(data);
             newData.forEach(function(user){
                 user.bars.forEach(function(bar){
-                    console.log(bar);
                     var goingBtn = document.getElementById(`${bar}`);
-                    console.log(goingBtn);
                     if(goingBtn){
                         var num = (Number(goingBtn.innerText.slice(0,1))+1).toString();
                         goingBtn.innerText = num + " going";
@@ -35,8 +32,6 @@
     }
     
     ajaxFunctions.ready(function(){
-        console.log("storage...");
-                    console.log(window.sessionStorage.getItem('searched'));
         var promise = new Promise(function(resolve, reject){
                 ajaxFunctions.ajaxRequest('GET', appUrl + '/authenticated', function(data){
                     resolve(data);
@@ -44,10 +39,8 @@
             });
             
         promise.then(function(data){
-            console.log(JSON.parse(data));
             var isAuthenticated = JSON.parse(data);
             if(isAuthenticated){
-                console.log("hi");
                 var p1 = document.createElement("p");
                 p1.innerHTML = 'Welcome, <span id="display-name"></span>!';
                 userInfo.append(p1);
@@ -111,8 +104,6 @@
                 ajaxFunctions.ajaxPostRequest({latitude: latitude, longitude: longitude}, appUrl + '/search', function(data){
                     var parsedData = JSON.parse(data);
                     window.sessionStorage.setItem('searched', JSON.stringify(true));
-                    console.log("storage...");
-                    console.log(window.sessionStorage.getItem('searched'));
                     parsedData.results.forEach(function(place, index){
                         var li = document.createElement("li");
                         var img = document.createElement("img");
@@ -125,14 +116,12 @@
                                 var id = e.target.getAttribute("id");
                                 var myBars = new Promise(function(resolve, reject){
                                     ajaxFunctions.ajaxRequest('GET', appUrl + '/search', function(data){
-                                        console.log(JSON.parse(data));
                                         resolve(JSON.parse(data));
                                     });
                                 });
                                 myBars.then(function(data){
                                    if(data[0].bars.indexOf(id) === -1){
                                        ajaxFunctions.ajaxPostRequest({bar_id: id}, appUrl + '/going', function(data){
-                                            console.log(data);
                                             var goingBtn = document.getElementById(`${id}`);
                                             var num = (Number(goingBtn.innerText.slice(0,1))+1).toString();
                                             goingBtn.innerText = num + " going";
@@ -140,7 +129,6 @@
                                    }
                                     else{
                                         ajaxFunctions.ajaxPostRequest({bar_id: id}, appUrl + '/delete', function(data){
-                                            console.log(data);
                                             var goingBtn = document.getElementById(`${id}`);
                                             var num = (Number(goingBtn.innerText.slice(0,1))-1).toString();
                                             goingBtn.innerText = num + " going";
@@ -153,7 +141,6 @@
                             li.innerHTML += '<h3 class="text-primary" style="display:inline-block;">' + place.name + '</h3><br><h6 class="text-success">Address: ' + place.vicinity + '</h6><br><br><hr><br><br>';
                         list.append(li);
                         if(index === parsedData.results.length-1 && isAuthenticated){
-                            console.log("updating...");
                             updateGoing();
                         }
                     });
@@ -161,7 +148,6 @@
             });
         }).then(function(){
             if(window.sessionStorage.getItem('searched')){
-            console.log("storage found!!");
             search.click();
             }
         });

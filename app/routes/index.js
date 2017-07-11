@@ -50,7 +50,6 @@ module.exports = function (app, passport) {
 		
 	app.route('/search')
 		.post(function(req, res){
-		//	console.log(req.body);
 			search.nearby(req.body).then(function(data){
 				res.send(data);
 			});
@@ -68,7 +67,6 @@ module.exports = function (app, passport) {
 		
 	app.route('/going')
 		.post(function(req, res){
-			//console.log(req.user);
 			search.addBar(req.user._id, req.body.bar_id).then(function(data){
 				res.send("success");
 			});

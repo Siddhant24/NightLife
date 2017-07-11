@@ -7,7 +7,6 @@ module.exports = {
     nearby: function(data){
         return new Promise(function(resolve, reject){
         var url = `${process.env.API_URL}?location=${data.latitude},${data.longitude}&radius=50000&type=bar&key=${process.env.API_KEY}`;
-       // console.log(url);
         request(url, function (err, response, body) {
             if(err) console.log(err);
             if(response.statusCode !== 200) console.log(response);
@@ -25,7 +24,6 @@ module.exports = {
                 $addToSet: {bars: bar_id}
             }, {new: true}, function(err, doc){
                 if(err) console.error(err);
-                console.log(doc);
             });
             resolve("success");
         });
@@ -49,7 +47,6 @@ module.exports = {
                 $pull: {bars: bar_id}
             }, {new: true}, function(err, doc){
                 if(err) console.error(err);
-                console.log(doc);
             });
              resolve("success");
         })
