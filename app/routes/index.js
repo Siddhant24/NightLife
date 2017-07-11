@@ -54,6 +54,36 @@ module.exports = function (app, passport) {
 			search.nearby(req.body).then(function(data){
 				res.send(data);
 			});
+		})
+		.get(function(req, res){
+			search.myBars(req.user._id).then(function(data){
+				res.send(data);
+			})
+		});
+		
+	app.route('/authenticated')
+		.get(function(req, res){
+			res.send(req.isAuthenticated());
+		});
+		
+	app.route('/going')
+		.post(function(req, res){
+			//console.log(req.user);
+			search.addBar(req.user._id, req.body.bar_id).then(function(data){
+				res.send("success");
+			});
+		})
+		.get(function(req, res){
+			search.allBars().then(function(data){
+				res.send(data);
+			});
+		});
+		
+	app.route('/delete')
+		.post(function(req, res){
+			search.deleteBar(req.user._id, req.body.bar_id).then(function(data){
+				res.send(data);
+			})
 		});
 
 };
