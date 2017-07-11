@@ -3,11 +3,14 @@
   "version": "0.0.1",
   "description": "find nearby bars",
   "main": "server.js",
+  "engines":{
+    "node":"4.6.1"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Siddhant24/NightLife"
   },
-  "homepage": "http://www.clementinejs.com/",
+  "homepage": "https://whatsgoingontonight.herokuapp.com/",
   "bugs": "https://github.com/Siddhant24/NightLife",
   "keywords": [
     "MongoDB",
