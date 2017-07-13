@@ -4,7 +4,7 @@
   "description": "find nearby bars",
   "main": "server.js",
   "engines":{
-    "node":"4.6.1"
+    "node":"4.8.4"
   },
   "repository": {
     "type": "git",
